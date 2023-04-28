@@ -2,3 +2,45 @@ body {
 	color: var(--tg-theme-text-color);
 	background: var(--tg-theme-bg-color);
 }
+
+#segments_list {
+	height: 400px;
+	width: 80%;
+	margin: auto;
+	overflow-y: auto;
+}
+
+
+#search_segment {
+  position: relative;
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 80%;
+  margin: auto;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px; 
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#segments_list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#segments_list li a {
+  border: 1px solid #ddd;
+  margin-top: -1px;
+/*  background-color: #f6f6f6;*/
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block;
+}
+
+#segments_list li a:hover:not(.header) {
+  background-color: #eee;
+}
