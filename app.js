@@ -4,7 +4,6 @@ tg.expand()
 
 var http = new XMLHttpRequest();
 var url = "https://line05w.bk6bba-resources.com/events/list?lang=ru&version=0&scopeMarket=1600";
-var params = JSON.stringify(myJSONobj);
 http.open("GET", url, true);
 
 //Send the proper header information along with the request
@@ -15,6 +14,6 @@ http.onreadystatechange = function() {
         document.getElementById('test').innerHtml = JSON.parse(http.responseText['sports']);//the JSON string from server will show here
     }
 }
-http.send(params);
+http.send();
 
 //tg.sendData('data');
