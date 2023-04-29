@@ -73,7 +73,7 @@ div.segment_name {
 	height: 30px;
 	text-align: center;
 	padding: auto;
-	min-width: 60px;
+	min-width: 50px;
 	margin: 0 5px 0 5px;
 }
 
@@ -108,4 +108,9 @@ button#add_segments {
 
 button#remove_segments {
 	background-color: lightpink;
+}
+
+select {
+	height: 30px;
+	min-width: 40px;
 }

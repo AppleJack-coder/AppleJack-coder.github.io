@@ -1,5 +1,4 @@
 let tg = window.Telegram.WebApp;
-
 tg.expand()
 
 function get_segments() {
@@ -16,7 +15,7 @@ function get_segments() {
 	    	let sport = sports[i];
 	    	if (sport['kind'] == 'segment') {
 	    		sport_parent_name = sport['name'].split('. ')[0].replace(' ', '+');
-	    		sports_clean += `<li><input type="checkbox" class="checkbox" id="${sport['id']}_${sport['parentId']}_${sport_parent_name}"><div class="segment_name"><span>${sport['name']}</span></div><input type="text" class="min_koef"><input type="text" class="min_block"></li>`;
+	    		sports_clean += `<li><input type="checkbox" class="checkbox" id="${sport['id']}_${sport['parentId']}_${sport_parent_name}"><div class="segment_name"><span>${sport['name']}</span></div><input type="text" class="min_koef"><input type="text" class="min_block"><select><option>live</option><option>line</option><option>live+line</option></select></li>`;
 	    	}
 	    };
 	    document.getElementById('segments_list').innerHTML = sports_clean;
@@ -65,7 +64,9 @@ function collect_data(action) {
 		if (!min_block) {
 			min_block = 10;
 		}
-		selected_rows.push([segment_id, segment_name, sport_id, sport_name, parseFloat(min_koef), parseInt(min_block)]);
+		let select = row_element.getElementsByTagName('select')[0];
+		let type = select.options[select.selectedIndex].text;
+		selected_rows.push([segment_id, segment_name, sport_id, sport_name, parseFloat(min_koef), parseInt(min_block), type]);
 	}
 	return JSON.stringify(selected_rows);
 }
@@ -75,3 +76,5 @@ function send_data(action) {
 
 	tg.sendData(data_to_send);
 }
+
+get_segments();
