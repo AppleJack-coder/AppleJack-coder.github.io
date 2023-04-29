@@ -8,9 +8,16 @@
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-	<input type="text" id="search_segment" onkeyup="search()" placeholder="Search for segment..">
-
-	<ul id="segments_list"></ul>
+	<div class="main">
+		<input type="text" id="search_segment" onkeyup="search()" placeholder="Search for segment..">
+		<ul class="header">
+			<li>Название сегмента</li>
+			<li>Мин. коэф.</li>
+			<li>Мин. блоки</li>
+		</ul>
+		<ul id="segments_list"></ul>
+		<button>Save</button>
+	</div>
 	<script src="app.js"></script>
 </body>
 </html>

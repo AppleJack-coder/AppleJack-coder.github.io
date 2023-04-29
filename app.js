@@ -16,7 +16,7 @@ http.onload = function() {
     	let sport = sports[i];
     	if (sport['kind'] == 'segment') {
     		sport_parent_name = sport['name'].split('. ')[0].replace(' ', '_');
-    		sports_clean += '<li><input type="checkbox" id="'+sport['id']+'_'+sport['parentId']+'_'+sport_parent_name+'"><a href="#">'+sport['name']+'</a></li>';
+    		sports_clean += '<li><input type="checkbox" class="checkbox" id="'+sport['id']+'_'+sport['parentId']+'_'+sport_parent_name+'"><div class="segment_name"><span>'+sport['name']+'</span></div><input type="text" class="min_koef"><input type="text" class="min_block"></li>';
     	}
     };
     document.getElementById('segments_list').innerHTML = sports_clean;
@@ -33,7 +33,7 @@ function search() {
   li = ul.getElementsByTagName('li');
 
   for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
+    a = li[i].getElementsByTagName("span")[0];
     txtValue = a.textContent || a.innerText;
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
       li[i].style.display = "";
