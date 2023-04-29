@@ -66,7 +66,7 @@ function collect_data(action) {
 		}
 		let select = row_element.getElementsByTagName('select')[0];
 		let type = select.options[select.selectedIndex].text;
-		selected_rows.push([segment_id, segment_name, sport_id, sport_name, parseFloat(min_koef), parseInt(min_block), type]);
+		selected_rows.push([parseInt(segment_id), segment_name, parseInt(sport_id), sport_name, parseFloat(min_koef), parseInt(min_block), type]);
 	}
 	return JSON.stringify(selected_rows);
 }
