@@ -2,28 +2,27 @@ let tg = window.Telegram.WebApp;
 
 tg.expand()
 
-var http = new XMLHttpRequest();
-var url = "https://line05w.bk6bba-resources.com/events/list?lang=en&version=0&scopeMarket=1600";
-http.open("GET", url, true);
+function get_segments() {
+	var http = new XMLHttpRequest();
+	var url = "https://line05w.bk6bba-resources.com/events/list?lang=en&version=0&scopeMarket=1600";
+	http.open("GET", url, true);
 
-//Send the proper header information along with the request
-http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-http.onload = function() {
-	let sports = JSON.parse(http.responseText)['sports'];
-	sports_clean = '';
-    for (var i = sports.length - 1; i >= 0; i--) {
-    	let sport = sports[i];
-    	if (sport['kind'] == 'segment') {
-    		sport_parent_name = sport['name'].split('. ')[0].replace(' ', '_');
-    		sports_clean += '<li><input type="checkbox" class="checkbox" id="'+sport['id']+'_'+sport['parentId']+'_'+sport_parent_name+'"><div class="segment_name"><span>'+sport['name']+'</span></div><input type="text" class="min_koef"><input type="text" class="min_block"></li>';
-    	}
-    };
-    document.getElementById('segments_list').innerHTML = sports_clean;
+	http.onload = function() {
+		let sports = JSON.parse(http.responseText)['sports'];
+		sports_clean = '';
+	    for (var i = sports.length - 1; i >= 0; i--) {
+	    	let sport = sports[i];
+	    	if (sport['kind'] == 'segment') {
+	    		sport_parent_name = sport['name'].split('. ')[0].replace(' ', '+');
+	    		sports_clean += `<li><input type="checkbox" class="checkbox" id="${sport['id']}_${sport['parentId']}_${sport_parent_name}"><div class="segment_name"><span>${sport['name']}</span></div><input type="text" class="min_koef"><input type="text" class="min_block"></li>`;
+	    	}
+	    };
+	    document.getElementById('segments_list').innerHTML = sports_clean;
+	}
+	http.send();
 }
-http.send();
-
-//tg.sendData('data');
 
 function search() {
   var input, filter, ul, li, a, i, txtValue;
@@ -41,4 +40,38 @@ function search() {
       li[i].style.display = "none";
     }
   }
+}
+
+function collect_data(action) {
+	let selected_checkboxs = document.querySelectorAll('input:checked'); 
+
+	let selected_rows = [];
+	selected_rows.push(action);
+	for (var i = 0; i < selected_checkboxs.length; i++) {
+		let checkbox = selected_checkboxs[i];
+		let row_element = checkbox.parentElement;
+
+		let segment_info = row_element.getElementsByClassName('checkbox')[0].id.split('_');
+
+		let segment_id = segment_info[0];
+		let sport_id = segment_info[1];
+		let sport_name = segment_info[2].replace('+', '_');
+		let segment_name = row_element.getElementsByTagName('span')[0].textContent;
+		let min_koef = row_element.getElementsByClassName('min_koef')[0].value;
+		let min_block = row_element.getElementsByClassName('min_block')[0].value;
+		if (!min_koef) {
+			min_koef = 0;
+		}
+		if (!min_block) {
+			min_block = 10;
+		}
+		selected_rows.push([segment_id, segment_name, sport_id, sport_name, parseFloat(min_koef), parseInt(min_block)]);
+	}
+	return JSON.stringify(selected_rows);
+}
+
+function send_data(action) {
+	data_to_send = collect_data(action);
+
+	tg.sendData(data_to_send);
 }

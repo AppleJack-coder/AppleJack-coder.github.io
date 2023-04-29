@@ -16,7 +16,11 @@
 			<li>Мин. блоки</li>
 		</ul>
 		<ul id="segments_list"></ul>
-		<button>Save</button>
+		<div id="buttons">
+			<button id="add_segments" onclick="send_data('add');">Add</button>
+			<button id="save_settings" onclick="send_data('save');">Save</button>
+			<button id="remove_segments" onclick="send_data('remove');">Remove</button>
+		</div>
 	</div>
 	<script src="app.js"></script>
 </body>

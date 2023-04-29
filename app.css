@@ -10,12 +10,13 @@ body {
 #segments_list {
 	display: block;
 	position: relative;
-	height: 600px;
-	width: 80%;
+	height: 500px;
+	width: 90%;
 	margin: auto;
 	overflow-y: auto;
 	list-style-type: none;
   	padding: 0;
+  	overflow-x: hidden;
 }
 
 
@@ -46,7 +47,7 @@ body {
 }
 .header li {
 	display: inline-block;
-	margin: 0 80px 0 80px;
+	margin: 0 5% 0 5%;
 }
 
 div.segment_name {
@@ -63,7 +64,6 @@ div.segment_name {
 	padding: 12px;
 	text-decoration: none;
 	font-size: 18px;
-	color: black;
 }
 #segments_list li input {
 	display: inline-block;
@@ -73,16 +73,39 @@ div.segment_name {
 	height: 30px;
 	text-align: center;
 	padding: auto;
+	min-width: 60px;
+	margin: 0 5px 0 5px;
+}
+
+#buttons {
+	display: flex;
+    justify-content: space-between;
+
+	position: relative;
+	margin: auto;
+	margin-top: 30px;
+	width: 400px;
 }
 
 button {
-	display: block;
-	position: relative;
-	background-color: lightgreen;
+/*	background-color: lightgreen;*/
+	display: inline-block;
 	width: 100px;
 	height: 50px;
-	margin: auto;
-	margin-top: 20px;
+/*	margin: auto;*/
+/*	margin-top: 20px;*/
 	cursor: pointer;
 	border-radius: 10px;
+}
+
+button#save_settings {
+	background-color: green;
+}
+
+button#add_segments {
+	background-color: lightgreen;
+}
+
+button#remove_segments {
+	background-color: lightpink;
 }
